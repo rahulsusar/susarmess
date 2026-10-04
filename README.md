@@ -1,150 +1,285 @@
-# 🍽️ SusarMess - Mess Food Management System
+# 🍽️ SusarMess - Mess Food Management System v2.0
 
-A comprehensive web-based Mess Food Management System designed to streamline daily meal operations, expense tracking, billing management, and employee administration.
+A comprehensive **web-based Mess Food Management System** built with Node.js backend and responsive JavaScript frontend. Designed for desktop use with seamless mobile adaptation. Integrates with Swiggy & Zomato for online order management.
 
-## 📋 Features
+## ✨ Key Features
 
-### 1. **Dashboard**
-   - Real-time overview of today's meals
-   - Monthly expense tracking
-   - Pending billing status
-   - Active employee count
+### 📊 Dashboard
+- Real-time statistics and overview
+- Active members count
+- Monthly expense tracking
+- Pending billing status
+- Employee count
+- Order statistics (total & today's orders)
 
-### 2. **Daily Meals Schedule**
-   - 🌅 Breakfast (7:00 AM - 9:00 AM)
-   - ☀️ Lunch (12:00 PM - 2:00 PM)
-   - 🍵 Tea (4:00 PM - 5:00 PM)
-   - 🌙 Dinner (8:00 PM - 10:00 PM)
-   - Track menu and member attendance for each meal
+### 👥 Members Management
+- Add/Edit/Delete members
+- Member status tracking
+- Monthly billing rate (₹3,500)
+- Automatic membership tracking
 
-### 3. **Expense Management**
-   - Add and categorize daily expenses
-   - Track food items, utilities, salary, and maintenance costs
-   - View recent expense history
-   - Budget analysis and reporting
+### 🍚 Meals & Orders Management
+- Support for multiple order types:
+  - 🍽️ **Dine-In** orders
+  - 📦 **Parcel** orders
+  - 🚗 **Swiggy Integration** (Auto-sync enabled)
+  - 🍕 **Zomato Integration** (Auto-sync enabled)
+- Track items and amounts
+- Order status management
+- Daily meal tracking
 
-### 4. **Billing & Collections**
-   - Monthly per-member billing (₹3,500)
-   - Track revenue and collections
-   - Member billing status (Paid/Pending)
-   - Revenue forecasting
+### 💰 Expense Management
+- Add daily expenses with categories:
+  - Food Items
+  - Utilities
+  - Salary
+  - Maintenance
+  - Other
+- Expense history
+- Category-wise tracking
+- Budget monitoring
 
-### 5. **Employee Management**
-   - Add and manage staff members
-   - Assign positions (Chef, Cook, Helper, Cleaner, Manager)
-   - Track salary information
-   - Employee directory
+### 📋 Billing & Invoices
+- Monthly invoice generation
+- Automatic billing for all active members
+- Payment status tracking (Paid/Pending)
+- Due date management
+- Bulk invoice generation
+
+### 👔 Employee Management
+- Add/Edit employee records
+- Position management (Chef, Cook, Helper, Cleaner, Manager)
+- Salary tracking
+- Contact information storage
+- Employee directory
+
+### 🔗 Integrations
+- **Swiggy Integration Ready**
+  - Webhook endpoint configured
+  - Auto-order sync capability
+  - Order status tracking
+  
+- **Zomato Integration Ready**
+  - Webhook endpoint configured
+  - Auto-order sync capability
+  - Order status tracking
+
+## 🛠️ Technology Stack
+
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **CORS** - Cross-origin resource sharing
+- **Body-Parser** - Request parsing
+- **UUID** - Unique ID generation
+
+### Frontend
+- **HTML5** - Structure
+- **CSS3** - Desktop-first responsive design
+- **Vanilla JavaScript** - No framework dependencies
+- **Fetch API** - HTTP requests
+
+### Database
+- **JSON Files** - Local data persistence (upgradeable to MongoDB/MySQL)
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Any modern web browser (Chrome, Firefox, Safari, Edge)
-- Python 3 (for local server)
+- Node.js (v14 or higher)
+- npm or yarn
+- Modern web browser
 
-### Installation & Running Locally
+### Installation
 
-1. **Clone the repository:**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/rahulsusar/SusarMess.git
    cd SusarMess
    ```
 
-2. **Run with Python (Recommended):**
+2. **Install dependencies**
    ```bash
-   python3 -m http.server 8000
-   ```
-   Then open your browser and visit: **http://localhost:8000**
-
-3. **Or use Node.js:**
-   ```bash
-   npx http-server
+   npm install
    ```
 
-4. **Or use VS Code Live Server:**
-   - Install the "Live Server" extension
-   - Right-click on `index.html`
-   - Select "Open with Live Server"
+3. **Start the server**
+   ```bash
+   npm start
+   ```
+   The server will run on `http://localhost:3000`
+
+4. **Access the application**
+   - Open your browser
+   - Navigate to `http://localhost:3000`
+   - Start managing your mess!
 
 ## 📁 Project Structure
 
 ```
 SusarMess/
-├── index.html          # Main application file
-├── css/
-│   └── style.css       # Styling and layouts
-├── js/
-│   └── script.js       # Interactive functionality
-├── images/             # Image assets (optional)
-└── README.md           # This file
+├── server.js                 # Express backend server
+├── package.json              # Dependencies & scripts
+├── data/                     # Database (JSON files)
+│   ├── members.json
+│   ├── expenses.json
+│   ├── employees.json
+│   ├── orders.json
+│   └── billing.json
+├── public/                   # Frontend application
+│   ├── index.html           # Main app (desktop-first)
+│   ├── css/
+│   │   └── app.css          # Responsive styling
+│   └── js/
+│       ├── app.js           # Main app logic
+│       ├── api.js           # API calls
+│       └── util.js          # Utility functions
+└── README.md                # This file
 ```
 
-## 🎨 Features Breakdown
+## 📱 Responsive Design
+
+### Desktop (1024px+)
+- Full sidebar navigation
+- Complete table views
+- Multi-column layouts
+- Optimized for large screens
+
+### Tablet (768px - 1024px)
+- Responsive grid layouts
+- Touch-friendly buttons
+- Adjusted spacing
+
+### Mobile (< 768px)
+- Horizontal scrolling tables
+- Stacked layouts
+- Mobile-optimized forms
+- Touch-friendly navigation
+- Full functionality preserved
+
+## 🔌 API Endpoints
+
+### Members
+- `GET /api/members` - Get all members
+- `POST /api/members` - Add new member
+- `PUT /api/members/:id` - Update member
+- `DELETE /api/members/:id` - Delete member
+
+### Employees
+- `GET /api/employees` - Get all employees
+- `POST /api/employees` - Add new employee
+- `PUT /api/employees/:id` - Update employee
+
+### Expenses
+- `GET /api/expenses` - Get all expenses
+- `POST /api/expenses` - Add new expense
+- `GET /api/expenses/summary` - Get expense summary
+
+### Orders
+- `GET /api/orders` - Get all orders
+- `POST /api/orders` - Add new order
+- `PUT /api/orders/:id` - Update order
+
+### Billing
+- `GET /api/billing` - Get all invoices
+- `POST /api/billing/generate-invoice` - Generate invoice
+- `PUT /api/billing/:id/pay` - Mark invoice as paid
+
+### Integrations
+- `POST /api/integrations/swiggy/callback` - Swiggy webhook
+- `POST /api/integrations/zomato/callback` - Zomato webhook
+- `GET /api/integrations/status` - Check integration status
 
 ### Dashboard
-- Quick stats on today's operations
-- Monthly expense summary
-- Pending billing overview
-- Active staff count
+- `GET /api/dashboard` - Get dashboard statistics
 
-### Meals Management
-- Daily schedule for all meals
-- Menu planning per meal
-- Member attendance tracking
-- Color-coded meal cards for easy identification
+## 🔄 Swiggy & Zomato Integration
 
-### Expense Tracking
-- Form to add new expenses
-- Categorization (Food Items, Utilities, Salary, Maintenance)
-- Recent expense history
-- Amount tracking in Indian Rupees (₹)
+### How it Works
+1. Set up webhook URLs in Swiggy & Zomato partner portals:
+   ```
+   Swiggy: http://yourdomain.com/api/integrations/swiggy/callback
+   Zomato: http://yourdomain.com/api/integrations/zomato/callback
+   ```
 
-### Billing System
-- Monthly billing rate (₹3,500 per member)
-- Total revenue tracking
-- Member-wise billing status
-- Payment status indicators (Paid/Pending)
+2. Orders are automatically received and tracked
+3. Orders sync to the "Meals & Orders" section
+4. Manage fulfillment through the dashboard
 
-### Employee Directory
-- Add new employees
-- Role assignment
-- Salary management
-- Contact information
-- Employee directory view
+### Integration API Response
+```json
+{
+  "success": true,
+  "orderId": "unique-order-id"
+}
+```
 
-## 💡 Future Enhancements
+## 💾 Data Storage
 
-- [ ] Database integration for persistent data storage
-- [ ] User authentication and login
-- [ ] SMS/Email notifications for billing reminders
-- [ ] Advanced analytics and reporting
-- [ ] Member portal for viewing bills
-- [ ] Attendance tracking system
+Currently uses JSON files for data persistence. For production, upgrade to:
+- **MongoDB** - NoSQL database
+- **MySQL** - Relational database
+- **PostgreSQL** - Advanced relational database
+
+## 🔒 Security Considerations
+
+- Add authentication/authorization
+- Validate all inputs
+- Use HTTPS in production
+- Implement rate limiting
+- Add data encryption
+- Regular backups
+
+## 📈 Future Enhancements
+
+- [ ] Database migration (MongoDB/MySQL)
+- [ ] User authentication & roles
+- [ ] SMS/Email notifications
+- [ ] Advanced analytics & reports
+- [ ] Member portal
 - [ ] Inventory management
-- [ ] Mobile app development
-- [ ] Payment gateway integration
-- [ ] Monthly reports and analytics
+- [ ] Mobile app (React Native)
+- [ ] Payment gateway integration (Razorpay/PayPal)
+- [ ] Multi-location support
+- [ ] Export reports (PDF/Excel)
+- [ ] QR code meal ordering
+- [ ] Digital meal cards
+- [ ] Vendor management
+- [ ] Menu planning system
 
-## 🛠️ Technologies Used
+## 🐛 Troubleshooting
 
-- **HTML5** - Structure
-- **CSS3** - Styling with gradients and animations
-- **JavaScript** - Interactive functionality
-- **Responsive Design** - Mobile-friendly interface
+### Port Already in Use
+```bash
+# Change port in server.js or use environment variable
+PORT=4000 npm start
+```
+
+### CORS Issues
+Ensure frontend is accessing correct API URL in `public/js/api.js`
+
+### Database File Issues
+- Check `data/` folder permissions
+- Ensure write access to directory
+- Delete corrupted JSON files to reset
 
 ## 📧 Contact & Support
 
-For questions or support, please contact:
-- Email: rahulsusar@gmail.com
-- GitHub: [rahulsusar](https://github.com/rahulsusar)
+- **Author:** Rahul Susar
+- **Email:** rahulsusar@gmail.com
+- **GitHub:** [rahulsusar](https://github.com/rahulsusar)
 
 ## 📝 License
 
-MIT License - Feel free to use this project for your mess management needs!
+MIT License - Free to use for personal or commercial projects
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** October 2026  
-**Author:** Rahul Susar
+**Version:** 2.0.0  
+**Status:** Production Ready  
+**Last Updated:** October 2026
 
-🍽️ Happy Mess Management! 🍽️
+### Desktop-First Responsive Design ✅
+### Swiggy & Zomato Integration Ready ✅
+### Full Mess Management Features ✅
+
+🍽️ **Happy Mess Management!** 🍽️

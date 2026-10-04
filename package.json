@@ -1,0 +1,31 @@
+{
+  "name": "susarmess",
+  "version": "2.0.0",
+  "description": "Mess Food Management System - Desktop & Mobile App with Swiggy/Zomato Integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "mess",
+    "food management",
+    "billing",
+    "expenses",
+    "membership",
+    "swiggy",
+    "zomato"
+  ],
+  "author": "Rahul Susar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

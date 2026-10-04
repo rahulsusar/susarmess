@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SusarMess - Mess Food Management System</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">🍽️ SusarMess</div>
+            <nav class="nav-menu">
+                <a href="#" data-page="dashboard" class="nav-item active">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="#" data-page="members" class="nav-item">
+                    <span>👥</span> Members
+                </a>
+                <a href="#" data-page="meals" class="nav-item">
+                    <span>🍚</span> Meals & Orders
+                </a>
+                <a href="#" data-page="expenses" class="nav-item">
+                    <span>💰</span> Expenses
+                </a>
+                <a href="#" data-page="billing" class="nav-item">
+                    <span>📋</span> Billing
+                </a>
+                <a href="#" data-page="employees" class="nav-item">
+                    <span>👔</span> Employees
+                </a>
+                <a href="#" data-page="integrations" class="nav-item">
+                    <span>🔗</span> Integrations
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="app-header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-actions">
+                    <span id="current-date"></span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Dashboard Page -->
+                <section id="dashboard-page" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Active Members</h3>
+                            <p class="stat-value" id="stat-members">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Expenses</h3>
+                            <p class="stat-value">₹<span id="stat-expenses">0</span></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Pending Billings</h3>
+                            <p class="stat-value" id="stat-billing">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Employees</h3>
+                            <p class="stat-value" id="stat-employees">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Orders</h3>
+                            <p class="stat-value" id="stat-orders">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Today's Orders</h3>
+                            <p class="stat-value" id="stat-today-orders">0</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="actions-grid">
+                            <button class="action-btn" onclick="switchPage('members')">➕ Add Member</button>
+                            <button class="action-btn" onclick="switchPage('meals')">🛒 Add Order</button>
+                            <button class="action-btn" onclick="switchPage('expenses')">💸 Add Expense</button>
+                            <button class="action-btn" onclick="switchPage('employees')">👔 Add Employee</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Members Page -->
+                <section id="members-page" class="page">
+                    <div class="page-header">
+                        <h2>Members Management</h2>
+                        <button class="btn btn-primary" onclick="showMemberForm()">+ Add New Member</button>
+                    </div>
+                    <div id="member-form" class="form-container" style="display:none;">
+                        <form onsubmit="addMember(event)">
+                            <input type="text" placeholder="Name" id="member-name" required>
+                            <input type="email" placeholder="Email" id="member-email" required>
+                            <input type="tel" placeholder="Phone" id="member-phone" required>
+                            <button type="submit" class="btn btn-primary">Add Member</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideMemberForm()">Cancel</button>
+                        </form>
+                    </div>
+                    <div id="members-list" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="members-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Meals & Orders Page -->
+                <section id="meals-page" class="page">
+                    <div class="page-header">
+                        <h2>Meals & Orders Management</h2>
+                        <div class="order-type-selector">
+                            <button class="btn-tab active" data-type="dine-in">🍽️ Dine-In</button>
+                            <button class="btn-tab" data-type="parcel">📦 Parcel</button>
+                            <button class="btn-tab" data-type="swiggy">🚗 Swiggy</button>
+                            <button class="btn-tab" data-type="zomato">🍕 Zomato</button>
+                        </div>
+                    </div>
+
+                    <div id="order-form" class="form-container">
+                        <h3>New Order</h3>
+                        <form onsubmit="addOrder(event)">
+                            <select id="order-type" required>
+                                <option value="dine-in">Dine-In</option>
+                                <option value="parcel">Parcel</option>
+                                <option value="swiggy">Swiggy</option>
+                                <option value="zomato">Zomato</option>
+                            </select>
+                            <input type="text" placeholder="Customer Name" id="order-customer" required>
+                            <textarea placeholder="Items (e.g., Rice, Dal, Curry)" id="order-items" required></textarea>
+                            <input type="number" placeholder="Amount (₹)" id="order-amount" required>
+                            <button type="submit" class="btn btn-primary">Create Order</button>
+                        </form>
+                    </div>
+
+                    <div id="orders-list" class="table-container">
+                        <h3>Recent Orders</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Expenses Page -->
+                <section id="expenses-page" class="page">
+                    <div class="page-header">
+                        <h2>Expense Management</h2>
+                        <button class="btn btn-primary" onclick="showExpenseForm()">+ Add Expense</button>
+                    </div>
+
+                    <div id="expense-form" class="form-container" style="display:none;">
+                        <form onsubmit="addExpense(event)">
+                            <input type="text" placeholder="Description" id="expense-description" required>
+                            <input type="number" placeholder="Amount (₹)" id="expense-amount" required>
+                            <select id="expense-category" required>
+                                <option value="">Select Category</option>
+                                <option value="Food Items">Food Items</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="date" id="expense-date" required>
+                            <button type="submit" class="btn btn-primary">Add Expense</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideExpenseForm()">Cancel</button>
+                        </form>
+                    </div>
+
+                    <div id="expenses-list" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenses-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Billing Page -->
+                <section id="billing-page" class="page">
+                    <div class="page-header">
+                        <h2>Billing & Invoices</h2>
+                        <button class="btn btn-primary" onclick="generateInvoices()">📄 Generate Invoices</button>
+                    </div>
+
+                    <div id="billing-list" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Member</th>
+                                    <th>Month</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billing-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Employees Page -->
+                <section id="employees-page" class="page">
+                    <div class="page-header">
+                        <h2>Employee Management</h2>
+                        <button class="btn btn-primary" onclick="showEmployeeForm()">+ Add Employee</button>
+                    </div>
+
+                    <div id="employee-form" class="form-container" style="display:none;">
+                        <form onsubmit="addEmployee(event)">
+                            <input type="text" placeholder="Name" id="employee-name" required>
+                            <input type="email" placeholder="Email" id="employee-email" required>
+                            <input type="tel" placeholder="Phone" id="employee-phone" required>
+                            <select id="employee-position" required>
+                                <option value="">Select Position</option>
+                                <option value="Chef">Chef</option>
+                                <option value="Cook">Cook</option>
+                                <option value="Helper">Helper</option>
+                                <option value="Cleaner">Cleaner</option>
+                                <option value="Manager">Manager</option>
+                            </select>
+                            <input type="number" placeholder="Monthly Salary (₹)" id="employee-salary" required>
+                            <button type="submit" class="btn btn-primary">Add Employee</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideEmployeeForm()">Cancel</button>
+                        </form>
+                    </div>
+
+                    <div id="employees-list" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Email</th>
+                                    <th>Salary</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employees-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Integrations Page -->
+                <section id="integrations-page" class="page">
+                    <div class="page-header">
+                        <h2>Integrations</h2>
+                    </div>
+
+                    <div class="integration-cards">
+                        <div class="integration-card">
+                            <h3>🚗 Swiggy Integration</h3>
+                            <p>Receive orders directly from Swiggy</p>
+                            <div class="integration-status" id="swiggy-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                            <p class="integration-info">
+                                <strong>Webhook URL:</strong><br>
+                                <code>/api/integrations/swiggy/callback</code>
+                            </p>
+                            <button class="btn btn-secondary">Configure</button>
+                        </div>
+
+                        <div class="integration-card">
+                            <h3>🍕 Zomato Integration</h3>
+                            <p>Receive orders directly from Zomato</p>
+                            <div class="integration-status" id="zomato-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                            <p class="integration-info">
+                                <strong>Webhook URL:</strong><br>
+                                <code>/api/integrations/zomato/callback</code>
+                            </p>
+                            <button class="btn btn-secondary">Configure</button>
+                        </div>
+                    </div>
+
+                    <div class="integration-section">
+                        <h3>Integration Settings</h3>
+                        <div class="settings-form">
+                            <label>
+                                <input type="checkbox" checked> Enable Swiggy Orders
+                            </label>
+                            <label>
+                                <input type="checkbox" checked> Enable Zomato Orders
+                            </label>
+                            <label>
+                                <input type="checkbox"> Enable Auto-sync
+                            </label>
+                            <button class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
